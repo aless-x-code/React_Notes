@@ -1314,4 +1314,102 @@ class MyToDoList extends React.Component {
 }
 
 // ________________________________________________________________________
-//
+// assigning unique keys to arrays
+
+const frontEndFrameworks = [
+  // array
+  "React",
+  "Angular",
+  "Ember",
+  "Knockout",
+  "Backbone",
+  "Vue",
+];
+
+function Frameworks() {
+  const renderFrameworks = frontEndFrameworks.map((item) => (
+    <li key={item.toString()}>{item}</li>
+  )); // map throught array, return item as list, assign a unique key to each item, being the item's own string
+  return (
+    <div>
+      <h1>Popular Front End JavaScript Frameworks</h1>
+      <ul>{renderFrameworks}</ul> {/* render variable */}
+    </div>
+  );
+}
+
+// ________________________________________________________________________
+// array.filter()
+
+class MyComponent99 extends React.Component {
+  constructor(props) {
+    // statefull component
+    super(props);
+    this.state = {
+      // state = users object w/ username name and online status
+      users: [
+        {
+          username: "Jeff",
+          online: true,
+        },
+        {
+          username: "Alan",
+          online: false,
+        },
+        {
+          username: "Mary",
+          online: true,
+        },
+        {
+          username: "Jim",
+          online: false,
+        },
+        {
+          username: "Sara",
+          online: true,
+        },
+        {
+          username: "Laura",
+          online: true,
+        },
+      ],
+    };
+  }
+  render() {
+    const usersOnline = this.state.users.filter((user) => user.online == true); // filter array => user online property = true
+    console.log(usersOnline);
+    const renderOnline = usersOnline.map((onlineUser) => (
+      <li key={onlineUser.username.toString()}>{onlineUser.username}</li>
+    )); // map online users to return user.username, unique key assigned
+    return (
+      <div>
+        <h1>Current Online Users:</h1>
+        <ul>{renderOnline}</ul>
+      </div>
+    );
+  }
+}
+
+// ________________________________________________________________________
+// Render React on the Server with renderToString
+/*
+So far I've been rendering React components on the client side
+But, you can use Node to render/run the JS of React on the server side
+Using the renderToString() method
+
+React files are made up of small portion on HTML and large portion of JS
+Browsers will index/snippet your code for search engine purposes, so it is better they only see HTML and its word content rather than JS formulas
+At the same time, the page will load faster (yet, still complete) with only HTML, but, React will still be able to access the JS from the server after the initial load
+
+*/
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div />;
+  }
+}
+
+ReactDOMServer.renderToString(<App />);
